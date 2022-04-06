@@ -1,51 +1,54 @@
 import Link from 'next/link'
+import React from 'react'
 import styled from 'styled-components'
+import NavHoverContent from '../navHoverContent/NavHoverContent'
 
-type NavLinkForStyleType = {
+type NavLinkForStyleProps = {
   href: string
   content: string
 }
 
-export default function NavContent() {
+type NavContentProps = {
+  onClickSearchBtn: () => void
+}
+
+export default function NavContent({ onClickSearchBtn }: NavContentProps) {
+  const clickSearchBtn = () => {
+    onClickSearchBtn()
+  }
+
   return (
-    <>
-      <StyledNav>
-        <StyledNavContainer>
-          <StyledShopNav>
-            <Link href="/" passHref>
-              <StyledShopLink>Shop</StyledShopLink>
-            </Link>
-            <HoverContainer />
-          </StyledShopNav>
-          <StyledNavContentList>
-            <NavLinkForStyle href="/" content="About" />
-          </StyledNavContentList>
-          <StyledNavContentList>
-            <NavLinkForStyle href="/" content="Collection" />
-          </StyledNavContentList>
-          <StyledNavContentList>
-            <NavLinkForStyle href="/" content="Contact" />
-          </StyledNavContentList>
-          <StyledNavContentList>
-            <NavLinkForStyle href="/" content="Notice" />
-          </StyledNavContentList>
-          <StyledNavContentList>
-            <NavLinkForStyle href="/" content="Q&A" />
-          </StyledNavContentList>
-          <StyledNavContentList>
-            <NavLinkForStyle href="/" content="Stockist" />
-          </StyledNavContentList>
-          <StyledNavContentList>
-            <NavLinkForStyle href="/" content="Search" />
-          </StyledNavContentList>
-          <div className="test"></div>
-        </StyledNavContainer>
-      </StyledNav>
-    </>
+    <StyledNav>
+      <StyledNavContainer>
+        <StyledShopNav>
+          <NavLinkForStyle href="/" content="Store" />
+          <NavHoverContent />
+        </StyledShopNav>
+        <StyledNavContentList>
+          <NavLinkForStyle href="/" content="About" />
+        </StyledNavContentList>
+        <StyledNavContentList>
+          <NavLinkForStyle href="/" content="Collection" />
+        </StyledNavContentList>
+        <StyledNavContentList>
+          <NavLinkForStyle href="/" content="Contact" />
+        </StyledNavContentList>
+        <StyledNavContentList>
+          <NavLinkForStyle href="/" content="Notice" />
+        </StyledNavContentList>
+        <StyledNavContentList>
+          <NavLinkForStyle href="/" content="Q&A" />
+        </StyledNavContentList>
+        <StyledNavContentList>
+          <NavLinkForStyle href="/" content="Stockist" />
+        </StyledNavContentList>
+        <StyledSearchBtn onClick={clickSearchBtn}>Search</StyledSearchBtn>
+      </StyledNavContainer>
+    </StyledNav>
   )
 }
 
-const NavLinkForStyle = ({ href, content }: NavLinkForStyleType) => {
+const NavLinkForStyle = ({ href, content }: NavLinkForStyleProps) => {
   return (
     <Link href={href} passHref>
       <StyledLink>{content}</StyledLink>
@@ -53,66 +56,18 @@ const NavLinkForStyle = ({ href, content }: NavLinkForStyleType) => {
   )
 }
 
-const HoverContainer = () => {
-  return (
-    <StyledHoverContainer>
-      <li>
-        <Link href="/">
-          <a>Best</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/">
-          <a>New</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/">
-          <a>Outer</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/">
-          <a>Top</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/">
-          <a>Bottom</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/">
-          <a>Accessory</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/">
-          <a>Season Off</a>
-        </Link>
-      </li>
-    </StyledHoverContainer>
-  )
-}
+const StyledNavContentList = styled.li``
 
-const ChangedBackground = styled.div`
-  position: absolute;
-  z-index: 0;
-  background: blue;
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transition: 0.25s;
-  pointer-events: none;
-`
-const StyledNavContentList = styled.li`
+const StyledSearchBtn = styled.button`
+  border: none;
+  outline: none;
+  background: inherit;
+  font-size: 1rem;
+  z-index: 999;
+  color: ${({ theme }) => theme.fontColor.black};
+  cursor: pointer;
   &:hover {
-    a {
-      color: ${({ theme }) => theme.fontColor.white};
-    }
+    color: ${({ theme }) => theme.fontColor.blue};
   }
 `
 
@@ -123,29 +78,24 @@ const StyledNav = styled.nav`
 const StyledLink = styled.a`
   z-index: 999;
   position: relative;
-`
-
-const StyledShopLink = styled(StyledLink)``
-
-const StyledHoverContainer = styled.ul`
-  display: none;
-  position: absolute;
-  z-index: 999;
-  li {
-    padding: 0.1rem 0;
-    color: ${({ theme }) => theme.fontColor.white};
-  }
-  a {
-    &:hover {
-      text-decoration: underline;
-    }
+  &:hover {
+    color: ${({ theme }) => theme.fontColor.blue};
   }
 `
 
 const StyledShopNav = styled(StyledNavContentList)`
+  position: relative;
   &:hover {
-    ul {
+    section {
       display: block;
+    }
+    ul {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    div {
+      opacity: 1;
+      pointer-events: auto;
     }
   }
 `
