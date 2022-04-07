@@ -20,14 +20,18 @@ export default function NavContent({
   const clickSearchBtn = () => {
     onClickSearchBtn()
   }
+  const handleTest = () => {
+    console.log('good!')
+  }
   return (
     <StyledNav clickedHambugerMenu={clickedHambugerMenu}>
       <StyledChangeBackground
         clickedHambugerMenu={clickedHambugerMenu}
+        onClick={handleTest}
       ></StyledChangeBackground>
       <StyledNavContainer clickedHambugerMenu={clickedHambugerMenu}>
         <StyledShopNav>
-          <NavLinkForStyle href="/" content="Store" />
+          <NavLinkForStyle href="/products" content="Store" />
           <NavHoverContent />
         </StyledShopNav>
         <li>

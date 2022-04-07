@@ -1,5 +1,7 @@
 import Head from 'next/head'
 import styled from 'styled-components'
+import HomeContents from '../src/components/homeContents/HomeContents'
+import Logo from '../src/components/logo/Logo'
 
 export default function Home() {
   return (
@@ -14,9 +16,7 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <StyledSection>
-        <h2>Hello</h2>
-      </StyledSection>
+      <HomeContents />
     </>
   )
 }

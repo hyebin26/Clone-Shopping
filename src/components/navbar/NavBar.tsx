@@ -65,6 +65,10 @@ export default function NavBar() {
 const StyledHeader = styled.header`
   padding: 1rem 3rem;
   height: 70px;
+  position: fixed;
+  background: white;
+  width: 100%;
+  z-index: 999;
 `
 
 const StyledHeaderContainer = styled.div<{ clickedSearchBtn: boolean }>`
