@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styled from 'styled-components'
 import HomeContents from '../src/components/homeContents/HomeContents'
-import Logo from '../src/components/logo/Logo'
+import NavBar from '../src/components/navbar/NavBar'
 
 export default function Home() {
   return (

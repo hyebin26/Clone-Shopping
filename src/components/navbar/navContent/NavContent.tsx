@@ -11,45 +11,44 @@ type NavLinkForStyleProps = {
 type NavContentProps = {
   onClickSearchBtn: () => void
   clickedHambugerMenu: boolean
+  onClickLinkForCancelHambuger: () => void
 }
 
 export default function NavContent({
   onClickSearchBtn,
   clickedHambugerMenu,
+  onClickLinkForCancelHambuger,
 }: NavContentProps) {
   const clickSearchBtn = () => {
     onClickSearchBtn()
   }
-  const handleTest = () => {
-    console.log('good!')
-  }
+
   return (
     <StyledNav clickedHambugerMenu={clickedHambugerMenu}>
       <StyledChangeBackground
         clickedHambugerMenu={clickedHambugerMenu}
-        onClick={handleTest}
       ></StyledChangeBackground>
       <StyledNavContainer clickedHambugerMenu={clickedHambugerMenu}>
-        <StyledShopNav>
+        <StyledShopNav onClick={onClickLinkForCancelHambuger}>
           <NavLinkForStyle href="/products" content="Store" />
           <NavHoverContent />
         </StyledShopNav>
-        <li>
+        <li onClick={onClickLinkForCancelHambuger}>
           <NavLinkForStyle href="/" content="About" />
         </li>
-        <li>
+        <li onClick={onClickLinkForCancelHambuger}>
           <NavLinkForStyle href="/" content="Collection" />
         </li>
-        <li>
+        <li onClick={onClickLinkForCancelHambuger}>
           <NavLinkForStyle href="/" content="Contact" />
         </li>
-        <li>
+        <li onClick={onClickLinkForCancelHambuger}>
           <NavLinkForStyle href="/" content="Notice" />
         </li>
-        <li>
+        <li onClick={onClickLinkForCancelHambuger}>
           <NavLinkForStyle href="/" content="Q&A" />
         </li>
-        <li>
+        <li onClick={onClickLinkForCancelHambuger}>
           <NavLinkForStyle href="/" content="Stockist" />
         </li>
         <StyledSearchBtn onClick={clickSearchBtn}>Search</StyledSearchBtn>
@@ -57,7 +56,7 @@ export default function NavContent({
     </StyledNav>
   )
 }
-
+// 클릭했을 때 => clickedHambuger가 트루라면 false로 변경하기?
 const NavLinkForStyle = ({ href, content }: NavLinkForStyleProps) => {
   return (
     <Link href={href} passHref>

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import HambugerMenu from './hambugerMenu/HambugerMenu'
 import NavContent from './navContent/NavContent'
@@ -17,6 +17,13 @@ export default function NavBar() {
   const onClickHambugerMenu = () => {
     setClickedHambugerMenu(!clickedHambugerMenu)
   }
+
+  const onClickLinkForCancelHambuger = () => {
+    if (clickedHambugerMenu) {
+      setClickedHambugerMenu(false)
+    }
+  }
+
   return (
     <StyledHeader>
       <StyledHeaderContainer clickedSearchBtn={clickedSearchBtn}>
@@ -25,7 +32,7 @@ export default function NavBar() {
           clickedHambugerMenu={clickedHambugerMenu}
         />
         <div>
-          <StyledTitle>
+          <StyledTitle onClick={onClickLinkForCancelHambuger}>
             <Link href="/">
               <a>ENZOCLONE</a>
             </Link>
@@ -34,6 +41,7 @@ export default function NavBar() {
         <NavContent
           onClickSearchBtn={onClickSearchBtn}
           clickedHambugerMenu={clickedHambugerMenu}
+          onClickLinkForCancelHambuger={onClickLinkForCancelHambuger}
         />
         <StyledUserContainer>
           <li>
