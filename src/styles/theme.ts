@@ -5,12 +5,14 @@ const fontColor = {
   white: '#fcfcfc',
 }
 
-const padding = {
-  largePadding: '3rem',
+const mediaQuery = {
+  large: '1023px',
+  medium: '660px',
 }
 
 const theme = {
   fontColor,
+  mediaQuery,
 }
 
 export default theme

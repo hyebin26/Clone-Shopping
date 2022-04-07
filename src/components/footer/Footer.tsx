@@ -17,9 +17,13 @@ export default function Footer() {
 }
 
 const StyledFooter = styled.footer`
-  padding: 1rem 0;
+  padding: 1rem 3rem;
   display: flex;
   justify-content: space-between;
   font-size: 0.9rem;
   color: ${({ theme }) => theme.fontColor.grey};
+  @media only screen and (max-width: ${({ theme }) =>
+      theme.mediaQuery.medium}) {
+    font-size: 0.7rem;
+  }
 `

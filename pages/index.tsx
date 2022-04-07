@@ -1,6 +1,4 @@
 import Head from 'next/head'
-import Footer from '../src/components/footer/Footer'
-import NavBar from '../src/components/navbar/NavBar'
 import styled from 'styled-components'
 
 export default function Home() {
@@ -17,9 +15,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StyledSection>
-        <NavBar />
         <h2>Hello</h2>
-        <Footer />
       </StyledSection>
     </>
   )

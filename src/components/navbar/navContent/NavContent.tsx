@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import NavHoverContent from '../navHoverContent/NavHoverContent'
 
 type NavLinkForStyleProps = {
@@ -10,38 +10,44 @@ type NavLinkForStyleProps = {
 
 type NavContentProps = {
   onClickSearchBtn: () => void
+  clickedHambugerMenu: boolean
 }
 
-export default function NavContent({ onClickSearchBtn }: NavContentProps) {
+export default function NavContent({
+  onClickSearchBtn,
+  clickedHambugerMenu,
+}: NavContentProps) {
   const clickSearchBtn = () => {
     onClickSearchBtn()
   }
-
   return (
-    <StyledNav>
-      <StyledNavContainer>
+    <StyledNav clickedHambugerMenu={clickedHambugerMenu}>
+      <StyledChangeBackground
+        clickedHambugerMenu={clickedHambugerMenu}
+      ></StyledChangeBackground>
+      <StyledNavContainer clickedHambugerMenu={clickedHambugerMenu}>
         <StyledShopNav>
           <NavLinkForStyle href="/" content="Store" />
           <NavHoverContent />
         </StyledShopNav>
-        <StyledNavContentList>
+        <li>
           <NavLinkForStyle href="/" content="About" />
-        </StyledNavContentList>
-        <StyledNavContentList>
+        </li>
+        <li>
           <NavLinkForStyle href="/" content="Collection" />
-        </StyledNavContentList>
-        <StyledNavContentList>
+        </li>
+        <li>
           <NavLinkForStyle href="/" content="Contact" />
-        </StyledNavContentList>
-        <StyledNavContentList>
+        </li>
+        <li>
           <NavLinkForStyle href="/" content="Notice" />
-        </StyledNavContentList>
-        <StyledNavContentList>
+        </li>
+        <li>
           <NavLinkForStyle href="/" content="Q&A" />
-        </StyledNavContentList>
-        <StyledNavContentList>
+        </li>
+        <li>
           <NavLinkForStyle href="/" content="Stockist" />
-        </StyledNavContentList>
+        </li>
         <StyledSearchBtn onClick={clickSearchBtn}>Search</StyledSearchBtn>
       </StyledNavContainer>
     </StyledNav>
@@ -56,7 +62,26 @@ const NavLinkForStyle = ({ href, content }: NavLinkForStyleProps) => {
   )
 }
 
-const StyledNavContentList = styled.li``
+const visible = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
+
+const StyledChangeBackground = styled.div<{ clickedHambugerMenu: boolean }>`
+  @media only screen and (max-width: ${({ theme }) => theme.mediaQuery.large}) {
+    position: absolute;
+    pointer-events: none;
+    animation: ${visible} 0.3s;
+    background: ${({ theme }) => theme.fontColor.blue};
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+`
 
 const StyledSearchBtn = styled.button`
   border: none;
@@ -69,10 +94,20 @@ const StyledSearchBtn = styled.button`
   &:hover {
     color: ${({ theme }) => theme.fontColor.blue};
   }
+  @media only screen and (max-width: ${({ theme }) => theme.mediaQuery.large}) {
+    display: none;
+  }
 `
 
-const StyledNav = styled.nav`
+const StyledNav = styled.nav<{ clickedHambugerMenu: boolean }>`
   flex: 0 0 50%;
+  @media only screen and (max-width: ${({ theme }) => theme.mediaQuery.large}) {
+    position: absolute;
+    display: ${({ clickedHambugerMenu }) =>
+      clickedHambugerMenu ? 'block' : 'none'};
+    left: 0;
+    top: 0;
+  }
 `
 
 const StyledLink = styled.a`
@@ -81,9 +116,14 @@ const StyledLink = styled.a`
   &:hover {
     color: ${({ theme }) => theme.fontColor.blue};
   }
+  @media only screen and (max-width: ${({ theme }) => theme.mediaQuery.large}) {
+    &:hover {
+      color: ${({ theme }) => theme.fontColor.black};
+    }
+  }
 `
 
-const StyledShopNav = styled(StyledNavContentList)`
+const StyledShopNav = styled.li`
   position: relative;
   &:hover {
     section {
@@ -98,9 +138,39 @@ const StyledShopNav = styled(StyledNavContentList)`
       pointer-events: auto;
     }
   }
+  @media only screen and (max-width: ${({ theme }) => theme.mediaQuery.large}) {
+    &:hover {
+      section {
+        display: none;
+      }
+      ul {
+        opacity: 0;
+        pointer-events: none;
+      }
+      div {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+  }
 `
 
-const StyledNavContainer = styled.ul`
+const StyledNavContainer = styled.ul<{ clickedHambugerMenu: boolean }>`
   display: flex;
   justify-content: space-between;
+  @media only screen and (max-width: ${({ theme }) => theme.mediaQuery.large}) {
+    display: ${({ clickedHambugerMenu }) =>
+      clickedHambugerMenu ? 'block' : 'none'};
+    top: 120px;
+    left: 50px;
+    position: absolute;
+    li {
+      color: white;
+      padding: 0.5rem 0;
+    }
+    button {
+      padding: 0.5rem 0;
+      color: white;
+    }
+  }
 `

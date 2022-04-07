@@ -18,6 +18,10 @@ export default function FlexedItems({ children, category }: FlexedItemsType) {
 const StyledItemCategory = styled.li`
   color: ${({ theme }) => theme.fontColor.black};
   font-size: 1rem;
+  @media only screen and (max-width: ${({ theme }) =>
+      theme.mediaQuery.medium}) {
+    font-size: 0.8rem;
+  }
 `
 
 const StyledUl = styled.ul`
