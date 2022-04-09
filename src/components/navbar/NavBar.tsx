@@ -18,12 +18,6 @@ export default function NavBar() {
     setClickedHambugerMenu(!clickedHambugerMenu)
   }
 
-  const onClickLinkForCancelHambuger = () => {
-    if (clickedHambugerMenu) {
-      setClickedHambugerMenu(false)
-    }
-  }
-
   return (
     <StyledHeader>
       <StyledHeaderContainer clickedSearchBtn={clickedSearchBtn}>
@@ -32,7 +26,7 @@ export default function NavBar() {
           clickedHambugerMenu={clickedHambugerMenu}
         />
         <div>
-          <StyledTitle onClick={onClickLinkForCancelHambuger}>
+          <StyledTitle>
             <Link href="/">
               <a>ENZOCLONE</a>
             </Link>
@@ -41,7 +35,7 @@ export default function NavBar() {
         <NavContent
           onClickSearchBtn={onClickSearchBtn}
           clickedHambugerMenu={clickedHambugerMenu}
-          onClickLinkForCancelHambuger={onClickLinkForCancelHambuger}
+          onClickHambugerMenu={onClickHambugerMenu}
         />
         <StyledUserContainer>
           <li>

@@ -11,47 +11,44 @@ type NavLinkForStyleProps = {
 type NavContentProps = {
   onClickSearchBtn: () => void
   clickedHambugerMenu: boolean
-  onClickLinkForCancelHambuger: () => void
+  onClickHambugerMenu: () => void
 }
 
 export default function NavContent({
   onClickSearchBtn,
   clickedHambugerMenu,
-  onClickLinkForCancelHambuger,
+  onClickHambugerMenu,
 }: NavContentProps) {
-  const clickSearchBtn = () => {
-    onClickSearchBtn()
-  }
-
   return (
     <StyledNav clickedHambugerMenu={clickedHambugerMenu}>
       <StyledChangeBackground
         clickedHambugerMenu={clickedHambugerMenu}
+        onClick={onClickHambugerMenu}
       ></StyledChangeBackground>
       <StyledNavContainer clickedHambugerMenu={clickedHambugerMenu}>
-        <StyledShopNav onClick={onClickLinkForCancelHambuger}>
+        <StyledShopNav>
           <NavLinkForStyle href="/products" content="Store" />
           <NavHoverContent />
         </StyledShopNav>
-        <li onClick={onClickLinkForCancelHambuger}>
+        <li>
           <NavLinkForStyle href="/" content="About" />
         </li>
-        <li onClick={onClickLinkForCancelHambuger}>
+        <li>
           <NavLinkForStyle href="/" content="Collection" />
         </li>
-        <li onClick={onClickLinkForCancelHambuger}>
+        <li>
           <NavLinkForStyle href="/" content="Contact" />
         </li>
-        <li onClick={onClickLinkForCancelHambuger}>
+        <li>
           <NavLinkForStyle href="/" content="Notice" />
         </li>
-        <li onClick={onClickLinkForCancelHambuger}>
+        <li>
           <NavLinkForStyle href="/" content="Q&A" />
         </li>
-        <li onClick={onClickLinkForCancelHambuger}>
+        <li>
           <NavLinkForStyle href="/" content="Stockist" />
         </li>
-        <StyledSearchBtn onClick={clickSearchBtn}>Search</StyledSearchBtn>
+        <StyledSearchBtn onClick={onClickSearchBtn}>Search</StyledSearchBtn>
       </StyledNavContainer>
     </StyledNav>
   )
@@ -77,7 +74,6 @@ const visible = keyframes`
 const StyledChangeBackground = styled.div<{ clickedHambugerMenu: boolean }>`
   @media only screen and (max-width: ${({ theme }) => theme.mediaQuery.large}) {
     position: absolute;
-    pointer-events: none;
     animation: ${visible} 0.3s;
     background: ${({ theme }) => theme.fontColor.blue};
     top: 0;
